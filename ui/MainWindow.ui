@@ -82,7 +82,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Mała gospodarka otwarta</string>
+      <string>Model klasyczny gospodarki otwartej</string>
      </property>
      <property name="checked">
       <bool>false</bool>
@@ -124,7 +124,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Duża gospodarka otwarta</string>
+      <string>Podejście międzyokresowe do bilansu płatniczego</string>
      </property>
     </widget>
    </widget>

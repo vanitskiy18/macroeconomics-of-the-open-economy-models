@@ -39,19 +39,6 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QSlider" name="slider_CF">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>480</y>
-     <width>221</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -76,7 +63,7 @@
     <rect>
      <x>280</x>
      <y>530</y>
-     <width>49</width>
+     <width>71</width>
      <height>16</height>
     </rect>
    </property>
@@ -87,26 +74,7 @@
     </font>
    </property>
    <property name="text">
-    <string>I</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>480</y>
-     <width>61</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>CF=(S-I)</string>
+    <string>I(r)+CF(r)</string>
    </property>
   </widget>
   <widget class="QSlider" name="slider_r">
@@ -138,7 +106,7 @@
     </font>
    </property>
    <property name="text">
-    <string>r*</string>
+    <string>r (=r*)</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">
@@ -157,7 +125,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Mała gospodarka otwarta</string>
+    <string>Model klasyczny gospodarki otwartej</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -166,9 +134,9 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>39</x>
      <y>120</y>
-     <width>330</width>
+     <width>331</width>
      <height>330</height>
     </rect>
    </property>
@@ -176,9 +144,9 @@
   <widget class="QWidget" name="widget_2" native="true">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>389</x>
      <y>120</y>
-     <width>330</width>
+     <width>331</width>
      <height>330</height>
     </rect>
    </property>
@@ -187,10 +155,16 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>530</y>
+     <y>480</y>
      <width>221</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="minimum">
+    <number>-100</number>
+   </property>
+   <property name="maximum">
+    <number>100</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -200,7 +174,7 @@
    <property name="geometry">
     <rect>
      <x>680</x>
-     <y>530</y>
+     <y>480</y>
      <width>49</width>
      <height>16</height>
     </rect>
@@ -213,6 +187,25 @@
    </property>
    <property name="text">
     <string>CA</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_open">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>530</y>
+     <width>281</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Uściślenie</string>
    </property>
   </widget>
  </widget>

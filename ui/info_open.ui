@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Info_open</class>
+ <widget class="QWidget" name="Info_open">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>761</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;1. W modelu małej gospodarki otwartej kraj przyjmuje zagraniczną stopę procentową &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;(r*)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;jako daną i nie ma na nią wpływu, podczas gdy w dużej gospodarce stopa procentowa&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;może być kształtowana przez politykę gospodarczą.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;2. W rozważanym modelu przyjmujemy tożsamość makroekonomiczną: &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;S − I = CF&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;3. Na prezentowanych wykresach może pojawić się ujemna wartość zmiennej &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;q&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;, co nie ma&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;interpretacji ekonomicznej. Jest to uproszczenie przyjęte w celu zachowania przejrzystości&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt; i czytelności graficznej modelu.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

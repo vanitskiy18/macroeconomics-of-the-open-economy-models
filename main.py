@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         elif self.radioButton_3.isChecked():
             self.openIntRate()
         elif self.radioButton_4.isChecked():
-            self.openClassic_big()
+            self.openBilans()
 
     def openClassic(self):
          self.classic=SecondWindow()
@@ -30,9 +30,9 @@ class MainWindow(QMainWindow):
         self.int_rate=ThirdWindow()
         self.int_rate.show()
 
-    def openClassic_big(self):
-        self.classic_big=FourthWindow()
-        self.classic_big.show()
+    def openBilans(self):
+        self.bilans=FourthWindow()
+        self.bilans.show()
 
 
 
@@ -51,24 +51,33 @@ class SecondWindow(QWidget):
         self.slider_S.valueChanged.connect(self.update_graph)
         self.slider_I.valueChanged.connect(self.update_graph)
         self.slider_r.valueChanged.connect(self.update_graph)
-        self.slider_CF.valueChanged.connect(self.update_graph)
+
         self.slider_CA.valueChanged.connect(self.update_graph)
+
+        self.slider_S.setValue((self.slider_S.minimum() + self.slider_S.maximum())//2)
+        self.slider_I.setValue(self.slider_I.maximum())
+        self.slider_r.setValue((self.slider_r.minimum() + self.slider_r.maximum())//2)
+        self.slider_CA.setValue((self.slider_CA.minimum()+self.slider_CA.maximum())//2)
 
         self.plot_small_open_economy_1(5,5,5)
         self.plot_small_open_economy_2(5,5)
         self.update_graph()
 
+        self.button_open.clicked.connect(self.openInfoOpen)
+
     def resizeEvent(self, event):
         self.canvas.setGeometry(self.widget.rect())
-    def resizeEvent_1(self, event):
         self.canvas_1.setGeometry(self.widget_2.rect())
+        super().resizeEvent(event)
 
     def update_graph(self):
         S = self.slider_S.value()/10
         I_param = self.slider_I.value()/10
         r_star=self.slider_r.value()/10
-        CF=self.slider_CF.value()/10
         sh=self.slider_CA.value()/10
+
+        I_eq = I_param - r_star
+        CF = S - I_eq
 
         self.plot_small_open_economy_1(S, I_param, r_star)
         self.plot_small_open_economy_2(CF,sh)
@@ -86,7 +95,7 @@ class SecondWindow(QWidget):
         I_eq = a - r_star
         CA = S-I_eq
 
-        ax.plot(I, r, label="I(r)")
+        ax.plot(I, r, label="I(r)+CF(r)")
         ax.axvline(x=S, label="S")
         ax.scatter(I_eq, r_star)
 
@@ -94,15 +103,15 @@ class SecondWindow(QWidget):
         ax.hlines(r_star, I_eq, S, linewidth=3)
         ax.text((I_eq+S)/2, r_star+0.3, 'CA')
 
-        ax.set_xlabel("I, S")
-        ax.set_ylabel("r*")
+        ax.set_xlabel("I+CF, S")
+        ax.set_ylabel("r")
 
         ax.set_xlim(0, 10)
         ax.set_ylim(0, 10)
 
-        ax.text(S + 0.2, 8, "S")
-        ax.text(8, 3, "I(r)")
-        ax.text(0.2, r_star+0.5, "r*")
+        ax.text(S + 0.2, 9, "S")
+        ax.text(I[0]-1.2, r[0]+1.5, "I(r)+CF(r)")
+        ax.text(0.2, r_star+0.5, "r")
 
         ax.legend()
 
@@ -115,34 +124,51 @@ class SecondWindow(QWidget):
         self.figure_1.clear()
         bx=self.figure_1.add_subplot(111)
             
-        q=np.linspace(1,9.5,100)
+        q=np.linspace(-9,9.5,100)
         CA_curve=q + sh
         q_eq= CF - sh
         CA_eq= CF
 
         bx.plot(CA_curve, q, label='CA(q)')
 
-        bx.axvline(x=CF, label='CF')
+        bx.axvline(x=CF, label='CF')    
 
         bx.scatter(CA_eq, q_eq)
 
-        bx.hlines(q_eq, 0, CA_eq, linestyles='dashed')
+        bx.hlines(q_eq, -10, CA_eq, linestyles='dashed')
+
+        bx.axhline(0, linewidth=1, linestyle='dashed', color='gray', alpha=0.5)
 
         bx.set_xlabel('CA')
         bx.set_ylabel('q')
 
-        bx.set_xlim(0,10)
-        bx.set_ylim(0,10)
+        bx.set_xlim(-10,10)
+        bx.set_ylim(-10,10)
 
-        bx.text(CF + 0.2, 8, "CF")
-        bx.text(8, 7, "CA(q)")
-        bx.text(0.2, q_eq+0.5, "q*")
+        bx.set_yticks(range(-10,11,2))
+        bx.set_xticks(range(-10,11,2))
+
+        bx.text(CF + 0.3, 8, "CF")
+        if q[-1]+sh>=10:
+            bx.text(CA_curve[0]-0.5,q[0]+3, "CA(q)")
+        else:
+            bx.text(CA_curve[-1]-0.5, q[-1]-3, "CA(q)")
+        bx.text(-9, q_eq+0.3, "q")
 
         bx.legend()
-        self.figure_1.subplots_adjust(left=0.15, right= 0.95,
+        self.figure_1.subplots_adjust(left=0.2, right= 0.95,
                                             top=0.9, bottom=0.2)
 
         self.canvas_1.draw()
+
+    def openInfoOpen(self):
+        self.info=InfoOpen()
+        self.info.show()
+
+class InfoOpen(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('ui/info_open.ui', self)
 
 
 class ThirdWindow(QWidget):
