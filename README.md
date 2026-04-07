@@ -52,11 +52,11 @@ Both graphs are dynamically updated using sliders, enabling real-time comparativ
 
 ### Classical Open Economy Model
 
-![Model](./assets/model.png)
+![Model](./screenshots/open_economy.jpg)
 
 ### Topic Selection Interface
 
-![Menu](./assets/menu.png)
+![Menu](./screenshots/main_window.jpg)
 
 ---
 
