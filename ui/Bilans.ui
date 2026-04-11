@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>480</y>
+     <y>500</y>
      <width>49</width>
      <height>16</height>
     </rect>
@@ -30,16 +30,6 @@
    </property>
    <property name="text">
     <string>r</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>120</y>
-     <width>330</width>
-     <height>330</height>
-    </rect>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">
@@ -68,7 +58,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>530</y>
+     <y>570</y>
      <width>49</width>
      <height>16</height>
     </rect>
@@ -83,27 +73,36 @@
     <string>β</string>
    </property>
   </widget>
-  <widget class="QSlider" name="horizontalSlider_3">
+  <widget class="QSlider" name="slider_beta">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>530</y>
+     <y>570</y>
      <width>221</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="minimum">
+    <number>25</number>
+   </property>
+   <property name="maximum">
+    <number>75</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QSlider" name="horizontalSlider">
+  <widget class="QSlider" name="slider_r">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>480</y>
+     <y>500</y>
      <width>221</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="maximum">
+    <number>50</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -112,11 +111,87 @@
   <widget class="QWidget" name="widget_2" native="true">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>120</y>
-     <width>330</width>
-     <height>330</height>
+     <x>40</x>
+     <y>100</y>
+     <width>410</width>
+     <height>360</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_future">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>165</y>
+     <width>211</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Pokazać krzywą możliwości
+ produkcyjnych w przyszłość</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_present">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>255</y>
+     <width>211</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Pokazać krzywą możliwości
+produkcyjnych w teraźniejszość</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_hide">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>345</y>
+     <width>211</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Schować krzywe możliwości
+produkcyjnych</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_info">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>510</y>
+     <width>271</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Uściślenie</string>
    </property>
   </widget>
  </widget>

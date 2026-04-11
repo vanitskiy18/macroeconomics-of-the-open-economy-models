@@ -4,20 +4,23 @@
 ![Type](https://img.shields.io/badge/Type-Economic%20Simulation-green)
 ![Status](https://img.shields.io/badge/status-learning%20project-lightgreen)
 ![University](https://img.shields.io/badge/University-Warsaw-orange)
+![UI](https://img.shields.io/badge/UI-PyQt6-blueviolet)
+![Rendering](https://img.shields.io/badge/HTML-Enabled-orange)
 
 This project provides an interactive visualization of key macroeconomic mechanisms in an open economy framework.
 
-Using a desktop application built with **PyQt6** and **Matplotlib**, users can explore how changes in economic parameters affect equilibrium outcomes in real time.
+Using a desktop application built with **PyQt6**, **Matplotlib**, and embedded **HTML rendering**, users can explore how changes in economic parameters affect equilibrium outcomes in real time.
 
 ---
 
-## 📌 Current Model
+## 📌 Current Models
 
-### Classical Open Economy Model *(Model klasyczny gospodarki otwartej)*
+The application currently implements two core macroeconomic frameworks within a **unified interface**:
 
-The application currently implements a simplified graphical representation of the classical open economy model within a **unified interface**.
+### 1. Classical Open Economy Model  
+*(Model klasyczny gospodarki otwartej)*
 
-Instead of separating small and large open economy cases, the model combines key relationships into one consistent visualization environment.
+A graphical representation of the standard open economy model, integrating key relationships into one consistent visualization environment.
 
 Users can analyze interactions between:
 
@@ -30,27 +33,67 @@ Users can analyze interactions between:
 
 ---
 
+### 2. Intertemporal Approach to the Balance of Payments  
+*(Podejście międzyokresowe do bilansu płatniczego)*
+
+A dynamic two-period model illustrating intertemporal consumption choices and external balance.
+
+The visualization includes:
+
+- Budget constraint:
+  - slope: **−(1 + r)**
+- Intertemporal consumption:
+  - **C₁, C₂**
+- Endowment points:
+  - **Y₁, Y₂**
+- Utility maximization:
+  - **U = C₁^β · C₂^(1−β)**
+- Equilibrium point (**Eₐ**)
+- Intertemporal trade interpretation
+
+Additionally, the model features:
+
+- Approximate **Production Possibility Frontiers (PPF)**  
+  modeled as smooth curves attached to the budget line
+- Comparative statics via:
+  - interest rate (**r**)
+  - time preference (**β**)
+
+---
+
 ## 📊 Visualizations
 
-The application generates two main interactive plots:
+The application generates multiple interactive plots:
 
+### Classical Model:
 1. **Savings–Investment / Capital Flows Diagram**
-   - illustrates the relationship between savings and the investment–capital flow schedule,
-   - shows equilibrium at a given interest rate (**r = r\***),
-   - determines the implied capital flows (**CF = S − I**).
+   - relationship between savings and investment–capital flow schedule
+   - equilibrium at **r = r\***
+   - capital flows: **CF = S − I**
 
 2. **Current Account and Real Exchange Rate Diagram**
-   - shows the relationship between the current account (**CA**) and real exchange rate (**q**),
-   - determines equilibrium exchange rate (**q\***),
-   - allows analysis of shifts in the current account function.
+   - **CA(q)** relationship
+   - equilibrium exchange rate (**q\***)
+   - shifts in current account
 
-Both graphs are dynamically updated using sliders, enabling real-time comparative statics.
+---
+
+### Intertemporal Model:
+3. **Intertemporal Consumption Diagram**
+   - budget line and optimal consumption choice
+   - utility curves
+   - PPF (present / future orientation)
+   - equilibrium adjustment
 
 ---
 
 ## 📸 Screenshots
 
-### Classical Open Economy Model
+### Intertemporal Model
+
+![Intertemporal](./assets/intertemporal.png)
+
+### Classical Model
 
 ![Model](./screenshots/open_economy.jpg)
 
@@ -62,25 +105,34 @@ Both graphs are dynamically updated using sliders, enabling real-time comparativ
 
 ## ⚙️ Key Features
 
-- Interactive sliders for all main parameters
+- Interactive sliders for key parameters:
+  - interest rate (**r**)
+  - time preference (**β**)
 - Real-time graph updates
-- Unified model interface (no separate windows)
 - Automatic equilibrium calculation
+- Multiple macroeconomic frameworks in one application
 - Visualization of:
-  - **S**
-  - **I(r) + CF(r)**
-  - **CF**
+  - **S, I, CF**
   - **CA(q)**
-  - **r = r\***
-  - **q**
+  - **intertemporal consumption (C₁, C₂)**
+  - **utility and equilibrium points**
 
 ---
 
-## 📎 Model Notes
+## 🧠 Model Notes
 
-- The model is a simplified educational representation.
-- Some parameter combinations may generate economically unrealistic values (e.g., negative *q*), which are intentionally allowed to preserve graphical clarity and flexibility.
-- The identity **S − I = CF** is imposed within the model structure.
+- The models are simplified educational representations.
+- Some parameter combinations may generate economically unrealistic values (e.g., negative *q*), which are intentionally allowed for visualization purposes.
+- The identity **S − I = CF** is imposed.
+- In the intertemporal model, **PPF curves are approximated using parametric functions attached to the budget line**.
+
+---
+
+## 🧾 UI & Rendering
+
+- Graphs are rendered using **Matplotlib**
+- Interface built with **PyQt6**
+- Mathematical descriptions and model assumptions are displayed using **embedded HTML (QTextBrowser)**
 
 ---
 
@@ -92,9 +144,6 @@ Both graphs are dynamically updated using sliders, enabling real-time comparativ
 - NumPy
 
 ---
-
-## 📁 Project Structure
-
 
 ## 📁 Project Structure
 open-economy-models
@@ -109,6 +158,8 @@ open-economy-models
 
 │ ├── Classic.ui
 
+│ ├── Bilans.ui
+
 │ └── ...
 
 ├── screenshots/
@@ -120,18 +171,18 @@ open-economy-models
 └── README.md
 
 
+
 ---
 
 ## 🚧 Future Development
 
 This project is actively being developed. Planned extensions include:
 
-- **Intertemporal approach to the balance of payments**  
-  *(podejście międzyokresowe do bilansu płatniczego)*
 - Interest Rate Parity *(Parytet stóp procentowych)*
 - Mundell–Fleming Model
 - Additional macroeconomic simulations
-- Improved UI/UX and model extensions
+- Improved graphical accuracy of PPF curves
+- UI/UX improvements
 
 ---
 
