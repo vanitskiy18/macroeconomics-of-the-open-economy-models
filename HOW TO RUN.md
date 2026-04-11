@@ -80,22 +80,36 @@ C:\Users\YourName\Documents\open-economy-models
 The project should keep the same structure as described below:
 
 open-economy-models
+
 │
+
 ├── main.py
+
 ├── ui/
+
 │   ├── MainWindow.ui
+
 │   ├── Classic.ui
+
 │   ├── Bilans.ui
+
 │   └── ...
-├── assets/
+
+├── screenshots/
+
 │   ├── model.png
+
 │   ├── Bilans.png
+
 │   └── ...
+
 ├── README.md
+
 └── HOW_TO_RUN.md
 
 ### Important:
 Do not move main.py away from the ui folder
+
 The .ui files must stay in the proper place, otherwise the application may not load correctly.
 
 ---
@@ -109,6 +123,7 @@ The .ui files must stay in the proper place, otherwise the application may not l
 2. Click in the folder path bar
 3. Type: cmd
 4. Press Enter
+
 A terminal window will open directly in the project folder.
 
 ### Then install the libraries:
@@ -116,6 +131,7 @@ pip install PyQt6 matplotlib numpy
 
 ### If pip does not work
 Try: python -m pip install PyQt6 matplotlib numpy
+
 or: py -m pip install PyQt6 matplotlib numpy
 
 ---
@@ -127,14 +143,20 @@ or: py -m pip install PyQt6 matplotlib numpy
 2. CLick: File -> Open
 3. Select main.py
 4. In the opened editor window click:
+
 Run -> Run Module
+
 or press: F5
+
 The application window should open.
 
 ### Option B - run from Command Prompt or Power Shell
 If you are already in the project folder, type:
+
 python main.py
+
 If that does not work, try:
+
 py main.py
 
 ---
@@ -145,6 +167,7 @@ py main.py
 This means one of the required libraries is missing.
 
 Install it with:
+
 pip install PyQt6 matplotlib numpy
 
 ### Problem: application cannot find .ui files
@@ -159,10 +182,12 @@ Make sure:
 This usually means Python was not added to PATH.
 
 Try: py main.py
+
 if that works, Python is installed correctly.
 
 ### Problem: IDLE is missing
 IDLE is usually installed with Python, but even ifi it is not available, the project can still be launched from:
+
 python main.py
 
 So IDLE is convenient, but not required
