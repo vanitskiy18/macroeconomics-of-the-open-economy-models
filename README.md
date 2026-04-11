@@ -91,7 +91,7 @@ The application generates multiple interactive plots:
 
 ### Intertemporal Model
 
-![Intertemporal](./assets/intertemporal.png)
+![Intertemporal](./screenshots/Bilans.jpg)
 
 ### Classical Model
 
