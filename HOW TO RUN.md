@@ -38,7 +38,6 @@ Add Python to PATH
 
 Open **Command Prompt (cmd)** or **PowerShell** and type:
 
-```bash
 python --version
 
 If python is installed correctly, you should see something like:
