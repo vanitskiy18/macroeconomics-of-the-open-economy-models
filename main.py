@@ -21,6 +21,8 @@ class MainWindow(QMainWindow):
             self.openIntRate()
         elif self.radioButton_4.isChecked():
             self.openBilans()
+        elif self.radioButton_5.isChecked():
+            self.openIntRate_1()
 
     def openClassic(self):
          self.classic=SecondWindow()
@@ -33,6 +35,10 @@ class MainWindow(QMainWindow):
     def openBilans(self):
         self.bilans=FourthWindow()
         self.bilans.show()
+
+    def openIntRate_1(self):
+        self.int_rate_1=FifthWindow()
+        self.int_rate_1.show()
 
 
 
@@ -129,8 +135,8 @@ class SecondWindow(QWidget):
         ax.xaxis.set_label_coords(0.9, -0.05)
         ax.yaxis.set_label_coords(-0.05, 0.98)
 
-        self.figure.subplots_adjust(left=0.15, right= 0.95,
-                                        top=0.9, bottom=0.2)
+        self.figure.subplots_adjust(left=0.1, right= 0.9,
+                                        top=0.9, bottom=0.1)
         self.canvas.draw()
         
 
@@ -159,8 +165,6 @@ class SecondWindow(QWidget):
         bx.set_xlim(-10,10)
         bx.set_ylim(-10,10)
 
-        bx.set_yticks(range(-10,11,2))
-        bx.set_xticks(range(-10,11,2))
 
         bx.text(CF + 0.3, 8, "CF")
         if q[-1]+sh>=10:
@@ -185,8 +189,8 @@ class SecondWindow(QWidget):
         bx.xaxis.set_label_coords(0.98, -0.05)
         bx.yaxis.set_label_coords(-0.05, 0.98)
 
-        self.figure_1.subplots_adjust(left=0.2, right= 0.95,
-                                            top=0.9, bottom=0.2)
+        self.figure_1.subplots_adjust(left=0.1, right= 0.9,
+                                            top=0.9, bottom=0.1)
 
         self.canvas_1.draw()
 
@@ -204,6 +208,173 @@ class ThirdWindow(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('ui/par_int_rate.ui', self)
+        self.label_2.setText("RET<sup>F</sup>(E<sup>e</sup>, i*, &rho;)")
+        self.figure=Figure()
+        self.figure_1=Figure()
+        self.canvas=FigureCanvas(self.figure)
+        self.canvas_1=FigureCanvas(self.figure_1)
+        self.canvas.setParent(self.widget)
+        self.canvas_1.setParent(self.widget_2)
+        self.canvas.setGeometry(self.widget.rect())
+        self.canvas_1.setGeometry(self.widget_2.rect())
+
+        self.slider_L.valueChanged.connect(self.update_graph)
+        self.slider_M.valueChanged.connect(self.update_graph)
+        self.slider_RET.valueChanged.connect(self.update_graph)
+
+        self.plot_par_int_rate(5,5)
+        self.plot_cash_market(5,5,5)
+        self.update_graph()
+
+        self.button_int_rate.clicked.connect(self.info_int_rate)
+
+    def resizeEvent(self, event):
+        self.canvas.setGeometry(self.widget.rect())
+        self.canvas_1.setGeometry(self.widget_2.rect())
+        super().resizeEvent(event)
+
+    def update_graph(self):
+        L=self.slider_L.value()/100
+        M_P=self.slider_M.value()/100
+        RET=self.slider_RET.value()/100
+        i=10/(4+M_P*3)+L*3
+
+        self.plot_par_int_rate(i, RET)
+        self.plot_cash_market(i, M_P, L)
+
+    def plot_par_int_rate(self, i, RET):
+        self.figure.clear()
+        cx = self.figure.add_subplot(111)
+        
+        i_star = np.linspace(0.5, 10, 100)
+        RET_star = 10 / i_star + RET*3
+        i1 = i
+        RET1 = 10 / i1 + RET*3
+
+        cx.plot(i_star, RET_star)
+
+        cx.axvline(x=i1)
+
+        cx.hlines(RET1, 0, i1, linestyles='dashed')
+
+        cx.scatter(i1, RET1)
+
+        cx.set_xlabel("i")
+        cx.set_ylabel("E")
+
+        cx.set_xlim(0, 10.5)
+        cx.set_ylim(0, 10.5)
+
+        cx.text(-0.5, RET1, "E")
+        cx.text(i1, -0.5, "i")
+        
+        cx.text(i1+0.5, 10, r'$RET^{D}(i)$')
+        cx.text(i_star[-1]-2, RET_star[-1]+1, r'$RET^{F}(E^{e}, i^{*}, \rho)$')
+
+        cx.spines['top'].set_visible(False)
+        cx.spines['right'].set_visible(False)
+        cx.spines['bottom'].set_visible(False)
+        cx.spines['left'].set_visible(False)
+
+        cx.annotate('', xy=(10,0), xytext=(-0.075,0),
+                    arrowprops=dict(arrowstyle='->', linewidth=1.5))
+        cx.annotate('', xy=(0,10), xytext=(0,-0.075),
+                    arrowprops=dict(arrowstyle='->', linewidth=1.5))
+
+        cx.set_xticks([])
+        cx.set_yticks([])
+
+        cx.xaxis.set_label_coords(0.9, -0.05)
+        cx.yaxis.set_label_coords(-0.05, 0.98)
+
+        self.figure.subplots_adjust(left=0.1, right= 0.9,
+                                        top=0.9, bottom=0.1)
+        
+        self.canvas.draw()
+
+    def plot_cash_market(self, i, M_P, L):
+        self.figure_1.clear()
+        dx=self.figure_1.add_subplot(111)
+
+        M_P_star = np.linspace(0.5, 10, 100)
+        i_star = 10 / M_P_star + L*3 
+
+        M_P1 = 4+M_P*3
+        i1=i
+
+        dx.plot(M_P_star, i_star)
+
+        dx.axvline(x=M_P1)
+
+        dx.hlines(i1, 0, M_P1, linestyles='dashed')
+
+        dx.scatter(M_P1, i1)
+
+        dx.set_xlabel(r'$\frac{M}{P}$')
+        dx.set_ylabel("i")
+
+        dx.set_xlim(0, 10.5)
+        dx.set_ylim(0, 10.5)
+
+        dx.text(-0.5, i1, 'i')
+        dx.text(M_P1, -0.7, r'$\frac{M}{P}$')
+
+        dx.text(M_P_star[-1]-2, i_star[-1]+1, r'$L(Y, i)$')
+        dx.text(M_P1+0.5, 10, r'$\frac{M}{P}$')
+
+
+        dx.spines['top'].set_visible(False)
+        dx.spines['right'].set_visible(False)
+        dx.spines['bottom'].set_visible(False)
+        dx.spines['left'].set_visible(False)
+
+        dx.annotate('', xy=(10,0), xytext=(-0.075,0),
+                    arrowprops=dict(arrowstyle='->', linewidth=1.5))
+        dx.annotate('', xy=(0,10), xytext=(0,-0.075),
+                    arrowprops=dict(arrowstyle='->', linewidth=1.5))
+
+        dx.set_xticks([])
+        dx.set_yticks([])
+
+        dx.xaxis.set_label_coords(0.9, -0.05)
+        dx.yaxis.set_label_coords(-0.05, 0.98)
+
+        self.figure_1.subplots_adjust(left=0.1, right= 0.9,
+                                        top=0.9, bottom=0.1)
+
+        self.canvas_1.draw()
+
+    def info_int_rate(self):
+        self.info=InfoIntRate()
+        self.info.show()
+
+class InfoIntRate(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('ui/info_int_rate.ui', self)
+        self.textBrowser.setHtml("""
+<html>
+  <body style="font-family:'Segoe UI'; font-size:14pt; font-weight:400;">
+    <p style="margin-top:0px; margin-bottom:36px;">
+      1. W rozważanym modelu przyjmujemy, że stopa procentowa <b>i</b> jest dana egzogenicznie z punktu widzenia rynku aktywów
+      (parytetu stóp procentowych) i nie jest bezpośrednio wyznaczana przez przecięcie krzywych
+      <b>RET<sup>F</sup></b> oraz <b>RET<sup>D</sup></b>. Jednocześnie poziom stopy procentowej jest określany na rynku pieniężnym.
+    </p>
+
+    <p style="margin-top:0px; margin-bottom:36px;">
+      2. Funkcja <b>RET<sup>D</sup>(i)</b>, opisująca dochodowość aktywów krajowych, jest traktowana jako dana
+      i nie ulega przesunięciom w ramach prezentowanej wizualizacji.
+    </p>
+
+    <p style="margin-top:0px; margin-bottom:0px;">
+      3. Przyjmujemy standardową interpretację kursu walutowego: spadek kursu oznacza aprecjację waluty krajowej
+      (<b>jej umocnienie</b>), natomiast wzrost kursu oznacza jej deprecjację
+      (<b>jej osłabienie</b>).
+    </p>
+  </body>
+</html>
+""")
+    
 
 class FourthWindow(QWidget):
     def __init__(self):
@@ -229,8 +400,6 @@ class FourthWindow(QWidget):
 
         self.plot_bilans(0.25,0.25)
         self.update_graph()
-        #except Exception as e:
-            #print("Błąd:", e)
 
     def resizeEvent(self, event):
         self.canvas.setGeometry(self.widget_2.rect())
@@ -424,6 +593,121 @@ class infoBilans(QWidget):
         </body>
         </html>
         """)
+
+class FifthWindow(QWidget):
+    def __init__(self):
+        try:
+            super().__init__()
+            uic.loadUi('ui/par_int_rate_1.ui',self)
+            self.figure=Figure()
+            self.canvas=FigureCanvas(self.figure)
+            self.canvas.setParent(self.widget)
+            self.canvas.setGeometry(self.widget.rect())
+
+            self.label_2.setText("RET<sup>D</sup>(i)")
+            self.label_3.setText("RET<sup>F</sup>(E<sup>e</sup>, i*, &rho;)")
+
+            self.slider_RET_D.valueChanged.connect(self.update_graph)
+            self.slider_RET_F.valueChanged.connect(self.update_graph)
+
+            self.plot_par_int_rate(5,5)
+            self.update_graph()
+
+            self.button_int_rate.clicked.connect(self.info_int_rate)
+        except Exception as e:
+            print('Błąd: ', e)
+
+    def resizeEvent(self, event):
+        self.canvas.setGeometry(self.widget.rect())
+        super().resizeEvent(event)
+
+    def update_graph(self):
+        RET_D=self.slider_RET_D.value()/100
+        RET_F=self.slider_RET_F.value()/100
+        
+        self.plot_par_int_rate(RET_D, RET_F)
+
+    def plot_par_int_rate(self, i, RET):
+        self.figure.clear()
+        cx = self.figure.add_subplot(111)
+        
+        i_star = np.linspace(0.5, 10, 100)
+        RET_star = 10 / i_star + RET*3
+        i1 = 4 + i*3
+        RET1 = 10 / i1 + RET*3
+
+        cx.plot(i_star, RET_star)
+
+        cx.axvline(x=i1)
+
+        cx.hlines(RET1, 0, i1, linestyles='dashed')
+
+        cx.scatter(i1, RET1)
+
+        cx.set_xlabel("i")
+        cx.set_ylabel("E")
+
+        cx.set_xlim(0, 10.5)
+        cx.set_ylim(0, 10.5)
+
+        cx.text(-0.5, RET1, "E")
+        cx.text(i1, -0.5, "i")
+        
+        cx.text(i1+0.5, 10, r'$RET^{D}(i)$')
+        cx.text(i_star[-1]-2, RET_star[-1]+1, r'$RET^{F}(E^{e}, i^{*}, \rho)$')
+
+        cx.spines['top'].set_visible(False)
+        cx.spines['right'].set_visible(False)
+        cx.spines['bottom'].set_visible(False)
+        cx.spines['left'].set_visible(False)
+
+        cx.annotate('', xy=(10,0), xytext=(-0.075,0),
+                    arrowprops=dict(arrowstyle='->', linewidth=1.5))
+        cx.annotate('', xy=(0,10), xytext=(0,-0.075),
+                    arrowprops=dict(arrowstyle='->', linewidth=1.5))
+
+        cx.set_xticks([])
+        cx.set_yticks([])
+
+        cx.xaxis.set_label_coords(0.9, -0.05)
+        cx.yaxis.set_label_coords(-0.05, 0.98)
+
+        self.figure.subplots_adjust(left=0.1, right= 0.9,
+                                        top=0.9, bottom=0.1)
+        
+        self.canvas.draw()
+        
+    def info_int_rate(self):
+        self.info=InfoIntRate_1()
+        self.info.show()
+
+class InfoIntRate_1(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('ui/info_int_rate_1.ui', self)
+        self.textBrowser.setHtml("""
+<html>
+  <body style="font-family:'Segoe UI'; font-size:14pt; font-weight:400;">
+    <p style="margin-top:0px; margin-bottom:36px;">
+      1. W rozważanym modelu przyjmujemy, że stopa procentowa <b>i</b> jest wyznaczana przez przecięcie krzywych
+      <b>RET<sup>D</sup>(i)</b> oraz <b>RET<sup>F</sup>(E<sup>e</sup>, i*, &rho;)</b>.
+    </p>
+
+    <p style="margin-top:0px; margin-bottom:36px;">
+      2. Funkcja <b>RET<sup>D</sup>(i)</b> opisuje dochodowość aktywów krajowych, natomiast
+      <b>RET<sup>F</sup>(E<sup>e</sup>, i*, &rho;)</b> opisuje oczekiwaną dochodowość aktywów zagranicznych.
+    </p>
+
+    <p style="margin-top:0px; margin-bottom:0px;">
+      3. Przyjmujemy standardową interpretację kursu walutowego: spadek kursu oznacza aprecjację waluty krajowej
+      (<b>jej umocnienie</b>), natomiast wzrost kursu oznacza jej deprecjację
+      (<b>jej osłabienie</b>).
+    </p>
+  </body>
+</html>
+""")
+    
+        
     
 
 if __name__=='__main__':

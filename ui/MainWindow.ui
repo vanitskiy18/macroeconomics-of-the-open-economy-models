@@ -95,7 +95,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>120</y>
+       <y>170</y>
        <width>391</width>
        <height>51</height>
       </rect>
@@ -125,6 +125,24 @@
      </property>
      <property name="text">
       <string>Podejście międzyokresowe do bilansu płatniczego</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_5">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>120</y>
+       <width>391</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Parytet stóp procentowych</string>
      </property>
     </widget>
    </widget>

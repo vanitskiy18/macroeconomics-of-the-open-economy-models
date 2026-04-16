@@ -13,7 +13,17 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label_5">
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>215</x>
+     <y>120</y>
+     <width>330</width>
+     <height>330</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -29,74 +39,16 @@
     </font>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Parytet stóp procentowych (+ rynek pieniężny)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Parytet stóp procentowych&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>120</y>
-     <width>330</width>
-     <height>330</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QWidget" name="widget_2" native="true">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>120</y>
-     <width>330</width>
-     <height>330</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QSlider" name="slider_RET">
+  <widget class="QSlider" name="slider_RET_D">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>480</y>
-     <width>221</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="minimum">
-    <number>-50</number>
-   </property>
-   <property name="maximum">
-    <number>100</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QSlider" name="slider_M">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>530</y>
-     <width>221</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="minimum">
-    <number>-50</number>
-   </property>
-   <property name="maximum">
-    <number>100</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QSlider" name="slider_L">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
      <y>480</y>
      <width>221</width>
      <height>21</height>
@@ -128,7 +80,7 @@
     </font>
    </property>
    <property name="text">
-    <string>RET (E, i*, p)</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;RET (i)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -136,8 +88,8 @@
     <rect>
      <x>280</x>
      <y>530</y>
-     <width>49</width>
-     <height>16</height>
+     <width>101</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
@@ -147,33 +99,33 @@
     </font>
    </property>
    <property name="text">
-    <string>M/P</string>
+    <string>RET (E, i*, p)</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QSlider" name="slider_RET_F">
    <property name="geometry">
     <rect>
-     <x>680</x>
-     <y>480</y>
-     <width>49</width>
-     <height>16</height>
+     <x>30</x>
+     <y>530</y>
+     <width>221</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-     <bold>true</bold>
-    </font>
+   <property name="minimum">
+    <number>-50</number>
    </property>
-   <property name="text">
-    <string>L(Y,i)</string>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
   <widget class="QPushButton" name="button_int_rate">
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>530</y>
+     <y>490</y>
      <width>281</width>
      <height>61</height>
     </rect>

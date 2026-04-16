@@ -7,7 +7,7 @@
 ![UI](https://img.shields.io/badge/UI-PyQt6-blueviolet)
 ![Rendering](https://img.shields.io/badge/HTML-Enabled-orange)
 
-This project provides an interactive visualization of key macroeconomic mechanisms in an open economy framework.
+This project provides an interactive visualization of key macroeconomic mechanisms in an open economy framework, combining real-time simulation with theoretical economic models.
 
 Using a desktop application built with **PyQt6**, **Matplotlib**, and embedded **HTML rendering**, users can explore how changes in economic parameters affect equilibrium outcomes in real time.
 
@@ -15,7 +15,9 @@ Using a desktop application built with **PyQt6**, **Matplotlib**, and embedded *
 
 ## 📌 Current Models
 
-The application currently implements two core macroeconomic frameworks within a **unified interface**:
+The application currently implements three core macroeconomic frameworks within a **unified interface**:
+
+---
 
 ### 1. Classical Open Economy Model  
 *(Model klasyczny gospodarki otwartej)*
@@ -61,6 +63,47 @@ Additionally, the model features:
 
 ---
 
+### 3. Interest Rate Parity (UIP)  
+*(Parytet stóp procentowych)*
+
+An interactive visualization of the uncovered interest rate parity condition, presented in two complementary variants:
+
+#### • UIP (standalone)
+
+A financial market perspective where the domestic interest rate is determined by the intersection of:
+
+- Domestic return function: **RETᴰ(i)**
+- Foreign return function: **RETᶠ(Eᵉ, i*, ρ)**
+
+Users can analyze:
+
+- expected exchange rate (**Eᵉ**)
+- foreign interest rate (**i\***)
+- risk premium (**ρ**)
+- equilibrium determination of:
+  - interest rate (**i**)
+  - exchange rate (**E**)
+
+---
+
+#### • UIP + Money Market
+
+An extended version integrating the UIP condition with the money market.
+
+The model combines:
+
+- Money supply: **M/P**
+- Money demand: **L(Y, i)**
+- Interest rate determination via money market equilibrium
+
+This allows users to observe how:
+
+- changes in **M/P** or **Y** affect **i**
+- which in turn shifts equilibrium in the UIP framework
+- monetary shocks transmit into exchange rate movements
+
+---
+
 ## 📊 Visualizations
 
 The application generates multiple interactive plots:
@@ -87,6 +130,19 @@ The application generates multiple interactive plots:
 
 ---
 
+### UIP Models:
+4. **Interest Rate Parity Diagram**
+   - intersection of **RETᴰ(i)** and **RETᶠ(Eᵉ, i*, ρ)**
+   - determination of equilibrium **i** and **E**
+   - shifts driven by expectations and risk premium
+
+5. **UIP with Money Market**
+   - interaction between **money market (M/P, L(Y,i))** and UIP
+   - indirect determination of exchange rate through **i**
+   - transmission of monetary shocks to the exchange rate
+
+---
+
 ## 📸 Screenshots
 
 ### Intertemporal Model
@@ -96,6 +152,14 @@ The application generates multiple interactive plots:
 ### Classical Model
 
 ![Model](./screenshots/open_economy.jpg)
+
+### Interest Rate Parity
+
+![UIP](./screenshots/par_int_rate_1.jpg)
+
+### UIP + Money Market
+
+![UIP+MM](./screenshots/par_int_rate.jpg)
 
 ### Topic Selection Interface
 
@@ -108,6 +172,8 @@ The application generates multiple interactive plots:
 - Interactive sliders for key parameters:
   - interest rate (**r**)
   - time preference (**β**)
+  - money supply (**M/P**)
+  - expected exchange rate and financial parameters
 - Real-time graph updates
 - Automatic equilibrium calculation
 - Multiple macroeconomic frameworks in one application
@@ -115,7 +181,11 @@ The application generates multiple interactive plots:
   - **S, I, CF**
   - **CA(q)**
   - **intertemporal consumption (C₁, C₂)**
-  - **utility and equilibrium points**
+  - **RETᴰ and RETᶠ functions**
+  - **money market equilibrium**
+- Dual-mode UIP analysis:
+  - standalone financial market
+  - integrated with money market
 
 ---
 
@@ -125,6 +195,9 @@ The application generates multiple interactive plots:
 - Some parameter combinations may generate economically unrealistic values (e.g., negative *q*), which are intentionally allowed for visualization purposes.
 - The identity **S − I = CF** is imposed.
 - In the intertemporal model, **PPF curves are approximated using parametric functions attached to the budget line**.
+- In the UIP standalone model, the interest rate is determined by the intersection of **RETᴰ(i)** and **RETᶠ(Eᵉ, i*, ρ)**.
+- In the extended UIP model, the interest rate is determined via the money market and transmitted to the exchange rate.
+- Risk premium (**ρ**) is treated as an exogenous parameter reflecting financial market conditions.
 
 ---
 
@@ -146,6 +219,7 @@ The application generates multiple interactive plots:
 ---
 
 ## 📁 Project Structure
+
 open-economy-models
 
 │
@@ -160,6 +234,8 @@ open-economy-models
 
 │ ├── Bilans.ui
 
+│ ├── par_int_rate.ui
+
 │ └── ...
 
 ├── screenshots/
@@ -168,9 +244,9 @@ open-economy-models
 
 ├── requirements.txt
 
+├── HOW TO RUN.md
+
 └── README.md
-
-
 
 ---
 
@@ -178,8 +254,8 @@ open-economy-models
 
 This project is actively being developed. Planned extensions include:
 
-- Interest Rate Parity *(Parytet stóp procentowych)*
 - Mundell–Fleming Model
+- Advanced UIP extensions (expectations formation, dynamics)
 - Additional macroeconomic simulations
 - Improved graphical accuracy of PPF curves
 - UI/UX improvements
